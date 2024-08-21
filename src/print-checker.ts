@@ -22,15 +22,15 @@ export async function checkImage(
   path: string,
   requirements: PrintCheckerRequirement
 ): Promise<true> {
-  const { width, height, density, channels } = await sharp(path).metadata();
+  const { width, height, density, space } = await sharp(path).metadata();
 
-  if (!width || !height || !density || !channels) {
+  if (!width || !height || !density || !space) {
     throw new MissingMetaDataException();
   }
 
   validate(
     {
-      colorMode: channels === 4 ? "CMYK" : "RGB",
+      colorMode: space === "cmyk" ? "CMYK" : "RGB",
       dpi: density,
       height,
       width,
@@ -102,20 +102,20 @@ async function isPDFColorModeCMYK(path: string) {
 
 function validate(media: Image | PDF, requirements: PrintCheckerRequirement) {
   if (media.colorMode !== requirements.colorMode) {
-    throw new WrongColorModeException();
+    throw new WrongColorModeException(`${media.colorMode}`);
   }
 
   if (isImage(media) && requirements.dpi) {
     if (media.dpi < requirements.dpi) {
-      throw new WrongDpiException();
+      throw new WrongDpiException(`${media.dpi}`);
     }
   }
 
   if (media.height !== requirements.height) {
-    throw new WrongHeightException();
+    throw new WrongHeightException(`${media.height}`);
   }
 
   if (media.width !== requirements.width) {
-    throw new WrongWidthException();
+    throw new WrongWidthException(`${media.width}`);
   }
 }
