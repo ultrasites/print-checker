@@ -1,0 +1,19 @@
+{
+  "name": "print-checker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ultrasites/print-checker.git",
+  "author": "Ultra Sites Medienagenur",
+  "license": "MIT",
+  "dependencies": {
+    "pdf-lib": "1.17.1",
+    "sharp": "0.33.5"
+  },
+  "devDependencies": {
+    "typescript": "5.5.4",
+    "vite": "5.4.1",
+    "vitest": "2.0.5",
+    "prettier": "3.3.3",
+    "@types/node": "22.4.1"
+  }
+}
