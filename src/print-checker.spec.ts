@@ -2,10 +2,7 @@ import { describe, expect, it } from "vitest";
 import { checkImage } from "./print-checker";
 import { PrintCheckerRequirement } from "./print-checker.types";
 import path from "path";
-import {
-  WrongColorModeException,
-  WrongHeightException,
-} from "./print-checker.errors";
+import { WrongColorModeException } from "./print-checker.errors";
 
 const fixturesPath = path.join(__dirname, "/__fixtures");
 
