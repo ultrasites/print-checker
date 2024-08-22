@@ -1,43 +1,28 @@
 # print-checker
 
-Library to check and analyze images and pdf documents for printing. It validates the size, color mode and the resolution of media files.
+Library to check and analyze images for printing. It validates the size, color mode and the resolution of media files.
 
 ## Example
 
-### Config/Requirements
-
 ```
-export type PrintCheckerRequirement = Pick<
-  Media,
-  "colorMode" | "height" | "width"
-> & { dpi?: number };
-```
+const requirement: PrintCheckerRequirement = {
+      colorMode: "CMYK",
+      height: 154, // unit: mm
+      width: 111, // unit: mm
+      dpi: 300,
+  };
 
-### Validate Image
-
-```
-export async function checkImage(
-  path: string,
-  requirements: PrintCheckerRequirement
-): Promise<true>
-```
-
-`path` is the path of the image,
-`requirements` is the config with the requirements of image/pdf.
-
-If the promise resolves, it responses `true`. Otherwise the promise will be rejected with an error.
-
-### Validate PDF
-
-```
-export async function checkPDF(
-  path: string,
-  requirements: PrintCheckerRequirement
-): Promise<true>
+try {
+  await checkImage("./example.jpg", requirement);
+} catch(e) {
+  if(e instanceof WrongHeightException) {
+    ...
+  }
+}
 ```
 
 `path` is the path of the image,
-`requirements` is the config with the requirements of image/pdf.
+`requirements` is the config with the requirements of image.
 
 If the promise resolves, it responses `true`. Otherwise the promise will be rejected with an error.
 
@@ -55,9 +40,12 @@ If the promise resolves, it responses `true`. Otherwise the promise will be reje
 
 ## Dependencies
 
-- pdf-lib (Lib to analyze and create pdf documents)
 - sharp (Lib to analyze images)
+
+## Roadmap
+
+- Solution to validate pdf documents
 
 ## Author
 
-## License
+Manuel Dierkes (m.dierkes@ultra-sites.de)
