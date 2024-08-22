@@ -1,9 +1,5 @@
-import { PDF, Image } from "./print-checker.types";
+import { Image } from "./print-checker.types";
 
-export function isPDF(imageOrPdf: Image | PDF): imageOrPdf is PDF {
-  return !("dpi" in imageOrPdf);
-}
-
-export function isImage(imageOrPdf: Image | PDF): imageOrPdf is Image {
-  return "dpi" in imageOrPdf;
+export function pxToMm(input: number, dpi = 72) {
+  return (input * 25.4) / dpi;
 }

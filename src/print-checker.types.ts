@@ -8,8 +8,4 @@ export interface Media {
 }
 
 export type Image = Media;
-export type PDF = Pick<Media, "colorMode" | "height" | "width">;
-export type PrintCheckerRequirement = Pick<
-  Media,
-  "colorMode" | "height" | "width"
-> & { dpi?: number };
+export type PrintCheckerRequirement = Media;
