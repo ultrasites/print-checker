@@ -9,12 +9,12 @@ const fixturesPath = path.join(__dirname, "/__fixtures");
 describe("Image", () => {
   it("should check image [true]", async () => {
     const requirement: PrintCheckerRequirement = {
-      colorMode: "RGB",
-      height: 862,
-      width: 1453,
-      dpi: 72,
+      colorMode: "CMYK",
+      height: 154,
+      width: 111,
+      dpi: 300,
     };
-    const imagePath = `${fixturesPath}/ultra-sites.png`;
+    const imagePath = `${fixturesPath}/DinA6.jpg`;
 
     const response = await checkImage(imagePath, requirement);
 
@@ -23,12 +23,12 @@ describe("Image", () => {
 
   it("should check image [wrong color mode]", async () => {
     const requirement: PrintCheckerRequirement = {
-      colorMode: "CMYK",
-      height: 862,
-      width: 1453,
-      dpi: 72,
+      colorMode: "RGB",
+      height: 154,
+      width: 111,
+      dpi: 300,
     };
-    const imagePath = `${fixturesPath}/ultra-sites.png`;
+    const imagePath = `${fixturesPath}/DinA6.jpg`;
 
     await expect(checkImage(imagePath, requirement)).rejects.toThrow(
       WrongColorModeException
